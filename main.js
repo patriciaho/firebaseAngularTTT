@@ -22,7 +22,7 @@ angular.module("TicTac", ["firebase"])
 				pieces:["\u2605", "\u25CF", "\u25FC", "\u25B2"],
 				playerNumber:null,
 				turn:null,
-				xsquared:null
+				xsquared: null
 	 		} );
 			$scope.fbRoot.$on("change", function() {
 				IDs = $scope.fbRoot.$getIndex();
@@ -73,8 +73,8 @@ angular.module("TicTac", ["firebase"])
 
 	$scope.mainSize = function () {
 		return {
-			width: ($scope.ttt.xsquared * 60) + 'px',
-			height: ($scope.ttt.xsquared * 60) + 'px',
+			// width: ($scope.ttt.xsquared * 60) + 'px',
+			// height: ($scope.ttt.xsquared * 60) + 'px',
 		}
 	};
 
