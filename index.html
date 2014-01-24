@@ -25,7 +25,7 @@
 			<div x-ng-repeat="row in ttt.board track by $index" x-ng-class="{clear:true}" x-ng-style="rowSize()">
 				<div x-ng-repeat="cell in row track by $index" 
 				x-ng-class="{gray:(ttt.board[$parent.$index][$index] == ttt.players[0].piece || ttt.board[$parent.$index][$index] == ttt.players[2].piece), yellow:(ttt.board[$parent.$index][$index] == ttt.players[1].piece || ttt.board[$parent.$index][$index] == ttt.players[3].piece), cell: true, 'pulse-shrink': ttt.board[$parent.$index][$index] == ''}"
-				x-ng-click="ticClick($parent.$index,$index); checkWin($parent.$index,$index,ttt.board[$parent.$index][$index]);">
+				x-ng-click="ticClick($parent.$index,$index); checkWin($parent.$index,$index, ttt.board[$parent.$index][$index]);">
 				{{cell}}
 				</div>
 			</div>

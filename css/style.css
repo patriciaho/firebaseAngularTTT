@@ -49,7 +49,8 @@ h2 {
 }
 
 #main {
-	margin: 100px auto;
+	margin: 0 auto;
+	padding: 150px;
 }
 
 #start {

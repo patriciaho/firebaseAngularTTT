@@ -12,16 +12,13 @@ angular.module("TicTac", ["firebase"])
 		IDs = $scope.fbRoot.$getIndex();
 		if(IDs.length == 0)
 		{
-			// What???  No Board????  Let's build one.
 	 		$scope.fbRoot.$add( { 
 	 			board:[],
-				xWins:0,
-				oWins:0,
 				startGame:false,
 				players:[],
 				pieces:["\u2605", "\u25CF", "\u25FC", "\u25B2"],
-				playerNumber:null,
-				turn:null,
+				playerNumber: null,
+				turn: null,
 				xsquared: null
 	 		} );
 			$scope.fbRoot.$on("change", function() {
@@ -35,35 +32,26 @@ angular.module("TicTac", ["firebase"])
 		}
 
 	});
-
- 	// $scope.makeMove = function(idx){
- 	// 	if($scope.obj.board[idx]=="")
- 	// 	{
-		// 	$scope.obj.board[idx] = $scope.obj.xTurn ?'X':'O';
-		// 	$scope.obj.xTurn = !$scope.obj.xTurn;
-		// 	$scope.obj.$save();
- 	// 	}
- 	// };
  	
 
 	$scope.makeBoard = function () {
+		$scope.ttt.startGame = true;
 		var playerArray = new Array();
 		for (var i = 0; i < $scope.ttt.playerNumber; i++) {
-			playerArray.push({piece: $scope.ttt.pieces[i], tally: 0})
-		}
+			playerArray.push({piece: $scope.ttt.pieces[i], tally: 0});
+		};
 		$scope.ttt.players = playerArray;
 		$scope.ttt.turn = playerArray[0].piece;
-		if ($scope.ttt.xsquared >= 3 && $scope.ttt.xsquared <= 500) {
+		if ($scope.ttt.xsquared >= 3 && $scope.ttt.xsquared <= 100) {
 	    	var result = new Array();
 			for(var i = 0; i < ($scope.ttt.xsquared); i++) {
 			  var arr = new Array();
 				  for(var j = 0; j < ($scope.ttt.xsquared); j++) {
 				    arr.push('');
-				  };
+				  }
 			  result.push(arr);
 			};
 			$scope.ttt.board = result;
-			$scope.ttt.startGame= true;
 		}
 		else {
 			alert('Must be between 3 and 500');
@@ -73,9 +61,10 @@ angular.module("TicTac", ["firebase"])
 
 	$scope.mainSize = function () {
 		return {
-			// width: ($scope.ttt.xsquared * 60) + 'px',
-			// height: ($scope.ttt.xsquared * 60) + 'px',
+			width: ($scope.ttt.xsquared * 60) + 'px',
+			height: ($scope.ttt.xsquared * 60) + 'px',
 		}
+		$scope.ttt.$save();
 	};
 
 	$scope.rowSize = function () {
@@ -83,7 +72,9 @@ angular.module("TicTac", ["firebase"])
 			width: ($scope.ttt.xsquared * 60) + 'px',
 			height: (60) + 'px',
 		}
+		$scope.ttt.$save();
 	};
+
 		
 	$scope.ticClick = function(row, cell){
 		if ($scope.ttt.board[row][cell] == '') {
@@ -154,6 +145,7 @@ angular.module("TicTac", ["firebase"])
 				}
 			}
 		}
+		$scope.ttt.$save();
 	};
 });
 
