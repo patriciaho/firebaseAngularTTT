@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+	<head>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.8/angular.min.js" ></script>
+		<script type="text/javascript" src="main.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/hover.css">
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<link href='http://fonts.googleapis.com/css?family=Roboto:100' rel='stylesheet' type='text/css'>
+	</head>
+
+	<body x-ng-app="" x-ng-init="" x-ng-controller="allCTRL">
+		<div id="start" x-ng-hide="startGame">
+			<img src="images/icon.png" />
+			<h2></h2>
+			<form x-ng-submit="makeBoard()">
+				# of players  <input type="text" size="2" x-ng-model="playerNumber" /><br /><br />
+				board size  <input type="text" size="2" x-ng-model="xsquared" /><br /><br />
+				<input type="submit" style="font-family: 'Roboto'; color: gray; background-color: #79BD8F; height: 50px; width: 175px; font-size: 20px; border-radius: 10px" value="Let's do this!" />
+			</form>
+		</div>
+		<div id="main" x-ng-style="mainSize()">
+			<div x-ng-repeat="row in board track by $index" x-ng-class="{clear:true}" x-ng-style="rowSize()">
+				<div x-ng-repeat="cell in row track by $index" 
+				x-ng-class="{gray:(board[$parent.$index][$index] == players[0].piece || board[$parent.$index][$index] == players[2].piece), yellow:(board[$parent.$index][$index] == players[1].piece || board[$parent.$index][$index] == players[3].piece), cell: true, 'pulse-shrink': board[$parent.$index][$index] == ''}"
+				x-ng-click="ticClick($parent.$index,$index); checkWin($parent.$index,$index,board[$parent.$index][$index]);">
+				{{cell}}
+				</div>
+			</div>
+			<div id="scoreBoard" x-ng-show="startGame">
+				<div style="font-family: 'Roboto', cursive">
+					<div class="cell">
+						{{turn}}
+					</div>
+					<br />
+				{{players[0].piece}}   {{players[0].tally}}<br />
+				{{players[1].piece}}   {{players[1].tally}}<br />
+				{{players[2].piece}}   {{players[2].tally}}<br />
+				{{players[3].piece}}   {{players[3].tally}}<br />
+			</div>
+		</div>
+	</body>
+</html>
