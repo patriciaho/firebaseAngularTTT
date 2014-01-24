@@ -53,7 +53,7 @@ angular.module("TicTac", ["firebase"])
 		}
 		$scope.ttt.players = playerArray;
 		$scope.ttt.turn = playerArray[0].piece;
-		if ($scope.ttt.xsquared >= 3 && $scope.ttt.xsquared <= 30) {
+		if ($scope.ttt.xsquared >= 3 && $scope.ttt.xsquared <= 500) {
 	    	var result = new Array();
 			for(var i = 0; i < ($scope.ttt.xsquared); i++) {
 			  var arr = new Array();
@@ -66,7 +66,7 @@ angular.module("TicTac", ["firebase"])
 			$scope.ttt.startGame= true;
 		}
 		else {
-			alert('Must be between 3 and 30');
+			alert('Must be between 3 and 500');
 		}
 		$scope.ttt.$save();
 	};
