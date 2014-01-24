@@ -68,6 +68,7 @@ angular.module("TicTac", ["firebase"])
 		else {
 			alert('Must be between 3 and 30');
 		}
+		$scope.ttt.$save();
 	};
 
 	$scope.mainSize = function () {
