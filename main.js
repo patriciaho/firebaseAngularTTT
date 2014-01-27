@@ -1,8 +1,8 @@
-var ticTacRef;
-var IDs;
 angular.module("TicTac", ["firebase"])
  // .controller("TicTacCtrl", function($scope, $firebase){
  .controller("allCtrl", function($scope, $firebase){
+ 	var ticTacRef;
+	var IDs;
  	
  	ticTacRef = new Firebase("https://firebrix.firebaseio.com/");
  	$scope.fbRoot = $firebase(ticTacRef);
@@ -32,10 +32,11 @@ angular.module("TicTac", ["firebase"])
 		}
 
 	});
- 	
 
 	$scope.makeBoard = function () {
 		$scope.ttt.startGame = true;
+		location.reload();
+		$scope.startGame = $scope.ttt.startGame;
 		var playerArray = new Array();
 		for (var i = 0; i < $scope.ttt.playerNumber; i++) {
 			playerArray.push({piece: $scope.ttt.pieces[i], tally: 0});
@@ -79,6 +80,7 @@ angular.module("TicTac", ["firebase"])
 	$scope.ticClick = function(row, cell){
 		if ($scope.ttt.board[row][cell] == '') {
 			$scope.ttt.board[row][cell] = $scope.ttt.turn;
+			var player = $scope.ttt.turn;
 			if ($scope.ttt.turn == $scope.ttt.players[$scope.ttt.players.length-1].piece) {
 				$scope.ttt.turn = $scope.ttt.players[0].piece;
 			}
@@ -90,8 +92,10 @@ angular.module("TicTac", ["firebase"])
 					}
 				}
 			}	
-		}
+		};
+		$scope.checkWin(row, cell, player);
 		$scope.ttt.$save();
+		$scope.startGame = true;
 	};
 
 	//Win Logic
