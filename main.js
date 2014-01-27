@@ -35,7 +35,6 @@ angular.module("TicTac", ["firebase"])
 
 	$scope.makeBoard = function () {
 		$scope.ttt.startGame = true;
-		location.reload();
 		$scope.startGame = $scope.ttt.startGame;
 		var playerArray = new Array();
 		for (var i = 0; i < $scope.ttt.playerNumber; i++) {
@@ -58,6 +57,7 @@ angular.module("TicTac", ["firebase"])
 			alert('Must be between 3 and 500');
 		}
 		$scope.ttt.$save();
+		location.reload();
 	};
 
 	$scope.mainSize = function () {
